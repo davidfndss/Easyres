@@ -8,7 +8,7 @@ Route::get('/resume/all', [ResumeController::class, 'index']);
 
 Route::get('/resume/{id}', [ResumeController::class, 'show']);
 
-Route::post('/resume/createnew', [ResumeController::class, 'store']);
+Route::post('/resume/create', [ResumeController::class, 'store']);
 
 Route::patch('/resume/{id}/update', [ResumeController::class, 'update']);
 

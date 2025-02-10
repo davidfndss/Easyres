@@ -14,7 +14,7 @@ class ResumeController extends Controller
 
     public function index()
     {
-        return Resume::select('name', 'worked_at')->get();
+        return Resume::select('id', 'name', 'worked_at')->get();
     }
 
     public function store(Request $request)
@@ -49,7 +49,7 @@ class ResumeController extends Controller
             return $this->error('Resume not Found', 404);
         }
 
-        return $this->response('Resume Found', 200, ['resume'=> $findResume->name,''=> $findResume->id]);
+        return $this->response('Resume Found', 200, ['name'=> $findResume->name,'id'=> $findResume->id, 'worked_at' => $findResume->worked_at]);
     }
 
     public function update(Request $request, String $id)
@@ -71,6 +71,7 @@ class ResumeController extends Controller
         }
 
         $validatedData = $validator->validated();
+        $validatedData['worked_at'] = json_encode($validatedData['worked_at']);
         $updated = $foundResume->update($validatedData);
 
         if (!$updated) {
